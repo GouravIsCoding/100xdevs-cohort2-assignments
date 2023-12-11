@@ -4,12 +4,12 @@
  */
 
 function sleep(milliseconds) {
-  const startTime = Date.now();
-  const endTime = startTime + milliseconds;
-  console.log("thread blocked");
-  while (Date.now() <= endTime) {}
+  return new Promise((res, rej) => {
+    const startTime = Date.now();
+    const endTime = startTime + milliseconds;
+    while (Date.now() <= endTime) {}
+    res();
+  });
 }
 
-console.log("sleep start");
-sleep(4000);
-console.log("sleep complete");
+module.exports = sleep;
