@@ -6,13 +6,36 @@
 //  - HH:MM::SS (Eg. 13:45:23)
 
 //  - HH:MM::SS AM/PM (Eg 01:45:23 PM)
+
+hourLimit = 12; // 12 or 24 hour clock
+
+date = new Date();
+let hours = date.getHours();
+let minutes = date.getMinutes();
+let seconds = date.getSeconds();
 function time() {
-  date = new Date();
-  let hours = String(date.getHours()).padStart(2, "0");
-  let minutes = String(date.getMinutes()).padStart(2, "0");
-  let seconds = String(date.getSeconds()).padStart(2, "0");
+  seconds++;
+  if (seconds === 60) {
+    minutes++;
+    seconds = 0;
+  }
+  if (minutes === 60) {
+    hours++;
+    minutes = 0;
+  }
+  if (hours === 24) {
+    hours = 0;
+  }
   console.clear();
-  console.log(`${hours}:${minutes}:${seconds}`);
+  if (hourLimit === 24) console.log(`${hours}:${minutes}:${seconds}`);
+  else {
+    let strhours = String(hours).padStart(2, "0");
+    let strminutes = String(minutes).padStart(2, "0");
+    let strseconds = String(seconds).padStart(2, "0");
+    console.log(
+      `${strhours % 12}:${strminutes}:${strseconds}${hours > 12 ? "pm" : "am"}`
+    );
+  }
 }
 
 function showClock() {
