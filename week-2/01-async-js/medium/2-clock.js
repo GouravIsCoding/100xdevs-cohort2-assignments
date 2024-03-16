@@ -29,11 +29,11 @@ function time() {
   console.clear();
   if (hourLimit === 24) console.log(`${hours}:${minutes}:${seconds}`);
   else {
-    let strhours = String(hours).padStart(2, "0");
+    let strhours = String(hours % 12).padStart(2, "0");
     let strminutes = String(minutes).padStart(2, "0");
     let strseconds = String(seconds).padStart(2, "0");
     console.log(
-      `${strhours % 12}:${strminutes}:${strseconds}${hours > 12 ? "pm" : "am"}`
+      `${strhours}:${strminutes}:${strseconds}${hours > 12 ? "pm" : "am"}`
     );
   }
 }
